@@ -1,0 +1,463 @@
+{
+  "info": {
+    "name": "KalaKruti Price Calculators API",
+    "description": "API collection for testing Home, Kitchen, and Wardrobe Price Calculator endpoints",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Health Check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5000/health",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "health"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Calculate Estimate - 3BHK Large Luxe",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"bhk\": \"3bhk\",\n  \"size\": \"large\",\n  \"package\": \"luxe\",\n  \"rooms\": {\n    \"livingRoom\": 1,\n    \"kitchen\": 1,\n    \"bedroom\": 3,\n    \"bathroom\": 2,\n    \"dining\": 0\n  }\n}"
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/price-calculators/home/calculator/estimate",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "price-calculators",
+            "home",
+            "calculator",
+            "estimate"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Calculate Estimate - 1BHK Essentials",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"bhk\": \"1bhk\",\n  \"package\": \"essentials\",\n  \"rooms\": {\n    \"livingRoom\": 1,\n    \"kitchen\": 1,\n    \"bedroom\": 1,\n    \"bathroom\": 1,\n    \"dining\": 0\n  }\n}"
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/price-calculators/home/calculator/estimate",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "price-calculators",
+            "home",
+            "calculator",
+            "estimate"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Calculate Estimate - 2BHK Premium Small",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"bhk\": \"2bhk\",\n  \"size\": \"small\",\n  \"package\": \"premium\",\n  \"rooms\": {\n    \"livingRoom\": 1,\n    \"kitchen\": 1,\n    \"bedroom\": 2,\n    \"bathroom\": 2,\n    \"dining\": 1\n  }\n}"
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/price-calculators/home/calculator/estimate",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "price-calculators",
+            "home",
+            "calculator",
+            "estimate"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Submit Estimate",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Sanket Kadam\",\n  \"email\": \"sanket@example.com\",\n  \"phone\": \"9876543210\",\n  \"propertyName\": \"Skyline Residency\",\n  \"estimate\": {\n    \"bhk\": \"3bhk\",\n    \"size\": \"large\",\n    \"package\": \"luxe\",\n    \"estimatedPrice\": 2095200,\n    \"rooms\": {\n      \"livingRoom\": 1,\n      \"kitchen\": 1,\n      \"bedroom\": 3,\n      \"bathroom\": 2,\n      \"dining\": 0\n    },\n    \"breakdown\": {\n      \"livingRoom\": 150000,\n      \"kitchen\": 200000,\n      \"bedroom\": 360000,\n      \"bathroom\": 160000,\n      \"dining\": 0\n    }\n  }\n}"
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/price-calculators/home/calculator/submit",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "price-calculators",
+            "home",
+            "calculator",
+            "submit"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Get All Estimates",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5000/api/price-calculators/home/calculator/estimates?page=1&limit=10",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "price-calculators",
+            "home",
+            "calculator",
+            "estimates"
+          ],
+          "query": [
+            {
+              "key": "page",
+              "value": "1"
+            },
+            {
+              "key": "limit",
+              "value": "10"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Calculate Estimate - Invalid Package (Error Test)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"bhk\": \"2bhk\",\n  \"package\": \"invalid\",\n  \"rooms\": {\n    \"livingRoom\": 1,\n    \"kitchen\": 1,\n    \"bedroom\": 2,\n    \"bathroom\": 2,\n    \"dining\": 0\n  }\n}"
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/price-calculators/home/calculator/estimate",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "price-calculators",
+            "home",
+            "calculator",
+            "estimate"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Kitchen - Calculate Estimate - L-Shaped Premium",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"layout\": \"l-shaped\",\n  \"A\": 10,\n  \"B\": 8,\n  \"package\": \"premium\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/price-calculators/kitchen/calculator/estimate",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "price-calculators",
+            "kitchen",
+            "calculator",
+            "estimate"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Kitchen - Calculate Estimate - U-Shaped Luxe",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"layout\": \"u-shaped\",\n  \"A\": 8,\n  \"B\": 12,\n  \"C\": 8,\n  \"package\": \"luxe\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/price-calculators/kitchen/calculator/estimate",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "price-calculators",
+            "kitchen",
+            "calculator",
+            "estimate"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Kitchen - Calculate Estimate - Straight Essentials",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"layout\": \"straight\",\n  \"A\": 12,\n  \"package\": \"essentials\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/price-calculators/kitchen/calculator/estimate",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "price-calculators",
+            "kitchen",
+            "calculator",
+            "estimate"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Kitchen - Calculate Estimate - Parallel Premium",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"layout\": \"parallel\",\n  \"A\": 10,\n  \"B\": 10,\n  \"package\": \"premium\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/price-calculators/kitchen/calculator/estimate",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "price-calculators",
+            "kitchen",
+            "calculator",
+            "estimate"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Kitchen - Submit Estimate",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Sanket Kadam\",\n  \"email\": \"sanket@example.com\",\n  \"phone\": \"9876543210\",\n  \"city\": \"Pune\",\n  \"message\": \"Looking for a premium kitchen setup with modern appliances.\",\n  \"estimate\": {\n    \"layout\": \"l-shaped\",\n    \"A\": 10,\n    \"B\": 8,\n    \"package\": \"premium\",\n    \"estimatedPrice\": 97200\n  }\n}"
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/price-calculators/kitchen/calculator/submit",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "price-calculators",
+            "kitchen",
+            "calculator",
+            "submit"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Kitchen - Get All Estimates",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5000/api/price-calculators/kitchen/calculator/estimates?page=1&limit=10",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "price-calculators",
+            "kitchen",
+            "calculator",
+            "estimates"
+          ],
+          "query": [
+            {
+              "key": "page",
+              "value": "1"
+            },
+            {
+              "key": "limit",
+              "value": "10"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Kitchen - Calculate Estimate - Invalid Layout (Error Test)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"layout\": \"invalid-layout\",\n  \"A\": 10,\n  \"B\": 8,\n  \"package\": \"premium\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/price-calculators/kitchen/calculator/estimate",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "price-calculators",
+            "kitchen",
+            "calculator",
+            "estimate"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Kitchen - Calculate Estimate - Missing Dimension B (Error Test)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"layout\": \"l-shaped\",\n  \"A\": 10,\n  \"package\": \"premium\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/price-calculators/kitchen/calculator/estimate",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "price-calculators",
+            "kitchen",
+            "calculator",
+            "estimate"
+          ]
+        }
+      }
+    }
+  ]
+}

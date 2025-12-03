@@ -1,0 +1,56 @@
+[
+  {
+    "id": "delivered-1",
+    "title": "Contemporary 3BHK Apartment Design with Beige Wall Panel",
+    "description": "A stunning contemporary apartment featuring modern design elements and elegant beige wall panels.",
+    "longDescription": "This contemporary 3BHK apartment showcases the perfect blend of modern design and functionality...",
+    "location": "Subishi Iris Villas, Bangalore",
+    "scope": "Full Home, Kitchen, Swing",
+    "bhk": "3-BHK",
+    "pricing": "20 - 30 Lakhs",
+    "budget": "₹25 Lakhs",
+    "area": "1200 sq ft",
+    "style": "Contemporary",
+    "status": "COMPLETED",
+    "images": [
+      "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=600&fit=crop",
+      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=600&fit=crop"
+    ]
+  },
+  {
+    "id": "delivered-2",
+    "title": "3BHK Independent House Design in Pune with Parallel Kitchen",
+    "description": "A spacious independent house featuring a parallel kitchen design and modern amenities.",
+    "longDescription": "This independent house in Pune features a unique parallel kitchen design that maximizes space and functionality...",
+    "location": "Ideal Blooms, Pune",
+    "scope": "Full Home, Kitchen, Modular",
+    "bhk": "3-BHK",
+    "pricing": "25 - 35 Lakhs",
+    "budget": "₹30 Lakhs",
+    "area": "1500 sq ft",
+    "style": "Modern",
+    "status": "COMPLETED",
+    "images": [
+      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=600&fit=crop",
+      "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=600&fit=crop"
+    ]
+  },
+  {
+    "id": "delivered-3",
+    "title": "Contemporary 3BHK Apartment Design with Built-In TV Unit",
+    "description": "A modern apartment featuring a custom-built TV unit and contemporary design elements.",
+    "longDescription": "This contemporary apartment features a stunning built-in TV unit that serves as both a functional storage solution and a design statement...",
+    "location": "Prestige Tranquil, Mumbai",
+    "scope": "Full Home, Kitchen, Kids Bedroom",
+    "bhk": "3-BHK",
+    "pricing": "30 - 40 Lakhs",
+    "budget": "₹35 Lakhs",
+    "area": "1100 sq ft",
+    "style": "Contemporary",
+    "status": "COMPLETED",
+    "images": [
+      "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&fit=crop",
+      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=600&fit=crop"
+    ]
+  }
+]
