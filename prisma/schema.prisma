@@ -110,9 +110,10 @@ model WardrobeEstimate {
   whatsappUpdates Boolean  @default(false)
   height          String
   type            String
-  finish          String
-  material        String
-  accessories     String[]          // Array of accessories like ["loft", "drawer"]
+  finish          String?        // optional
+  material        String?        // optional
+  accessories     String[] @default([]) 
+        // Array of accessories like ["loft", "drawer"]
   estimatedPrice  Int
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
