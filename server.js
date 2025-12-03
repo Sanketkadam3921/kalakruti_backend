@@ -12,6 +12,7 @@ const { PrismaClient } = require('@prisma/client');
 const projectRoutes = require('./src/routes/projectRoutes');
 const designRoutes = require('./src/routes/designRoutes');
 const homeCalculatorRoutes = require('./src/routes/homeCalculatorRoutes');
+const wardrobeCalculatorRoutes = require('./src/routes/wardrobeCalculatorRoutes');
 
 // Import middleware
 const errorHandler = require('./src/middleware/errorHandler');
@@ -19,6 +20,9 @@ const notFound = require('./src/middleware/notFound');
 
 const app = express();
 const prisma = new PrismaClient();
+
+// Trust proxy - required for rate limiting behind reverse proxy (Render, etc.)
+app.set('trust proxy', 1);
 
 // Security middleware
 app.use(helmet());
@@ -50,6 +54,21 @@ app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 // Static files
 app.use('/uploads', express.static('uploads'));
 
+// Root endpoint
+app.get('/', (req, res) => {
+    res.status(200).json({
+        message: 'Kalakruti Studio API',
+        version: '1.0.0',
+        endpoints: {
+            health: '/health',
+            projects: '/api/projects',
+            designs: '/api/designs',
+            homeCalculator: '/api/price-calculators/home/calculator',
+            wardrobeCalculator: '/api/price-calculators/wardrobe/calculator',
+        }
+    });
+});
+
 // Health check endpoint
 app.get('/health', (req, res) => {
     res.status(200).json({
@@ -63,6 +82,7 @@ app.get('/health', (req, res) => {
 app.use('/api/projects', projectRoutes);
 app.use('/api/designs', designRoutes);
 app.use('/api/price-calculators/home/calculator', homeCalculatorRoutes);
+app.use('/api/price-calculators/wardrobe/calculator', wardrobeCalculatorRoutes);
 
 // Error handling middleware
 app.use(notFound);

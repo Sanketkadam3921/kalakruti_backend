@@ -93,6 +93,9 @@ async function saveEstimate({ name, email, phone, propertyName, whatsappUpdates,
                 height: estimateData.height?.toString() || null,
                 type: estimateData.type,
                 estimatedPrice: estimateData.estimatedPrice,
+                finish: null, // Optional field - set to null since it's not needed
+                material: null, // Optional field - set to null
+                accessories: [], // Default empty array
                 // Store length and package in a JSON field if schema supports it, or as separate fields
                 // For now, we'll store what we can in existing fields
             },
