@@ -83,13 +83,19 @@ class KitchenCalculatorService {
     // Calculate linear feet based on layout
     const linearFeet = this.calculateLinearFeet(layout, A, B, C);
 
+    // Standard kitchen width assumption (in feet)
+    const assumedWidth = 4;
+
+    // Calculate area: linearFeet × assumedWidth
+    const area = linearFeet * assumedWidth;
+
     // Get package price and layout multiplier
     const basePricePerSqFt = this.packagePrices[packageType];
     const layoutMultiplier = this.layoutMultipliers[layout];
 
-    // Calculate final estimated price (based on linear feet directly)
+    // Calculate final estimated price: area × pricePerSqFt × layoutMultiplier
     const estimatedPrice = Math.round(
-      linearFeet * basePricePerSqFt * layoutMultiplier
+      area * basePricePerSqFt * layoutMultiplier
     );
 
     return {
@@ -102,6 +108,8 @@ class KitchenCalculatorService {
       },
       package: packageType,
       linearFeet,
+      assumedWidth,
+      area,
       basePricePerSqFt,
       layoutMultiplier,
       estimatedPrice,
