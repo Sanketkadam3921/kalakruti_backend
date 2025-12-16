@@ -18,9 +18,6 @@ class KitchenCalculatorService {
     parallel: 1.1,
   };
 
-  // Standard cabinet height in feet
-  cabinetHeight = 2.5;
-
   /**
    * Calculate linear feet based on layout type
    * @param {String} layout - Layout type
@@ -86,16 +83,13 @@ class KitchenCalculatorService {
     // Calculate linear feet based on layout
     const linearFeet = this.calculateLinearFeet(layout, A, B, C);
 
-    // Calculate area (linear feet * cabinet height)
-    const area = linearFeet * this.cabinetHeight;
-
     // Get package price and layout multiplier
     const basePricePerSqFt = this.packagePrices[packageType];
     const layoutMultiplier = this.layoutMultipliers[layout];
 
-    // Calculate final estimated price
+    // Calculate final estimated price (based on linear feet directly)
     const estimatedPrice = Math.round(
-      area * basePricePerSqFt * layoutMultiplier
+      linearFeet * basePricePerSqFt * layoutMultiplier
     );
 
     return {
@@ -108,7 +102,6 @@ class KitchenCalculatorService {
       },
       package: packageType,
       linearFeet,
-      area,
       basePricePerSqFt,
       layoutMultiplier,
       estimatedPrice,
