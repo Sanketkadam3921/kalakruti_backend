@@ -7,12 +7,12 @@ const prisma = new PrismaClient();
 // Using midpoint of ranges for calculations
 const packagePrices = {
   sliding: {
-    basic: 1600, // ₹1,200 - ₹2,000 per sqft (midpoint: ₹1,600)
+    basic: 1800, // ₹1,200 - ₹2,000 per sqft (midpoint: ₹1,600)
     premium: 2750, // ₹2,000 - ₹3,500 per sqft (midpoint: ₹2,750)
     luxury: 4500, // ₹3,500 - ₹5,500 per sqft (midpoint: ₹4,500)
   },
   swing: {
-    basic: 1400, // ₹1,000 - ₹1,800 per sqft (midpoint: ₹1,400)
+    basic: 1500, // ₹1,000 - ₹1,800 per sqft (midpoint: ₹1,400)
     premium: 2400, // ₹1,800 - ₹3,000 per sqft (midpoint: ₹2,400)
     luxury: 4000, // ₹3,000 - ₹5,000 per sqft (midpoint: ₹4,000)
   },
