@@ -7,7 +7,7 @@ class HomeCalculatorService {
   priceRanges = {
     "1bhk": {
       essentials: { min: 3, max: 4 }, // Basic: 3L-4L
-      premium: { min: 10, max: 18 }, // Premium: 10L-18L
+      premium: { min: 5, max: 15 }, // Premium: 10L-18L
       luxe: { min: 18, max: 30 }, // Luxury: 18L-30L
     },
     "2bhk": {
