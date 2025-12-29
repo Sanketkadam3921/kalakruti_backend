@@ -2,39 +2,53 @@ const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
 class KitchenCalculatorService {
-  // Package prices per square foot (in INR)
-  // Using midpoint of ranges: Basic (₹1,500-₹2,500), Premium (₹2,500-₹4,000), Luxury (₹4,000-₹6,000)
-  packagePrices = {
-    essentials: 2000, // Basic: ₹1,500 - ₹2,500 per sqft (midpoint: ₹2,000)
-    premium: 3250, // Premium: ₹2,500 - ₹4,000 per sqft (midpoint: ₹3,250)
-    luxe: 5000, // Luxury: ₹4,000 - ₹6,000 per sqft (midpoint: ₹5,000)
-  };
-
-  // Layout multipliers
-  layoutMultipliers = {
-    "l-shaped": 1.2,
-    "u-shaped": 1.5,
-    straight: 1.0,
-    parallel: 1.1,
+  // Package prices per square foot (in INR) - Layout-specific pricing
+  layoutPackagePrices = {
+    straight: {
+      essentials: 2000,
+      premium: 3200,
+      luxe: 5200,
+    },
+    "l-shaped": {
+      essentials: 2300,
+      premium: 3400,
+      luxe: 5800,
+    },
+    "u-shaped": {
+      essentials: 2800,
+      premium: 4300,
+      luxe: 7000,
+    },
+    parallel: {
+      essentials: 2500,
+      premium: 3800,
+      luxe: 6200,
+    },
   };
 
   /**
    * Calculate linear feet based on layout type
+   * Accounts for common areas where cabinets overlap
    * @param {String} layout - Layout type
    * @param {Number} A - Dimension A in feet
    * @param {Number} B - Dimension B in feet (optional)
    * @param {Number} C - Dimension C in feet (optional)
+   * @param {Number} width - Kitchen width in feet (default: 2)
    * @returns {Number} Total linear feet
    */
-  calculateLinearFeet(layout, A, B = 0, C = 0) {
+  calculateLinearFeet(layout, A, B = 0, C = 0, width = 2) {
     switch (layout) {
       case "straight":
+        // No common area, just A
         return A;
       case "l-shaped":
-        return A + B;
+        // Subtract width from B due to common area at the corner
+        return A + B - width;
       case "u-shaped":
-        return A + B + C;
+        // Subtract width from 2 sides (B and C) due to common areas
+        return A + B + C - 2 * width;
       case "parallel":
+        // No common area, parallel sides
         return A + B;
       default:
         return A;
@@ -59,15 +73,15 @@ class KitchenCalculatorService {
       );
     }
 
-    if (!this.packagePrices[packageType]) {
+    if (!this.layoutPackagePrices[layout]) {
       throw new Error(
-        `Invalid package type: ${packageType}. Must be one of: essentials, premium, luxe`
+        `Invalid layout type: ${layout}. Must be one of: l-shaped, u-shaped, straight, parallel`
       );
     }
 
-    if (!this.layoutMultipliers[layout]) {
+    if (!this.layoutPackagePrices[layout][packageType]) {
       throw new Error(
-        `Invalid layout type: ${layout}. Must be one of: l-shaped, u-shaped, straight, parallel`
+        `Invalid package type: ${packageType}. Must be one of: essentials, premium, luxe`
       );
     }
 
@@ -80,23 +94,20 @@ class KitchenCalculatorService {
       throw new Error("Dimensions B and C are required for U-shaped layout");
     }
 
-    // Calculate linear feet based on layout
-    const linearFeet = this.calculateLinearFeet(layout, A, B, C);
+    // Standard kitchen width (in feet)
+    const assumedWidth = 2;
 
-    // Standard kitchen width assumption (in feet)
-    const assumedWidth = 4;
+    // Calculate linear feet based on layout (accounts for common areas)
+    const linearFeet = this.calculateLinearFeet(layout, A, B, C, assumedWidth);
 
     // Calculate area: linearFeet × assumedWidth
     const area = linearFeet * assumedWidth;
 
-    // Get package price and layout multiplier
-    const basePricePerSqFt = this.packagePrices[packageType];
-    const layoutMultiplier = this.layoutMultipliers[layout];
+    // Get layout-specific package price per square foot
+    const pricePerSqFt = this.layoutPackagePrices[layout][packageType];
 
-    // Calculate final estimated price: area × pricePerSqFt × layoutMultiplier
-    const estimatedPrice = Math.round(
-      area * basePricePerSqFt * layoutMultiplier
-    );
+    // Calculate final estimated price: area × pricePerSqFt
+    const estimatedPrice = Math.round(area * pricePerSqFt);
 
     return {
       status: "success",
@@ -110,8 +121,7 @@ class KitchenCalculatorService {
       linearFeet,
       assumedWidth,
       area,
-      basePricePerSqFt,
-      layoutMultiplier,
+      pricePerSqFt,
       estimatedPrice,
     };
   }
