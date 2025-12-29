@@ -42,11 +42,8 @@ function calculateEstimate({ length, height, type, package: packageType }) {
     );
   }
 
-  // Standard wardrobe width (depth) in feet
-  const standardWidth = 2;
-
-  // Calculate area in square feet (length × height × width)
-  const area = length * height * standardWidth;
+  // Calculate area in square feet (length × height)
+  const area = length * height;
 
   // Get price per sqft based on type and package
   const pricePerSqFt = packagePrices[type][packageType];
@@ -60,7 +57,6 @@ function calculateEstimate({ length, height, type, package: packageType }) {
     breakdown: {
       length,
       height,
-      width: standardWidth,
       area,
       type,
       package: packageType,
