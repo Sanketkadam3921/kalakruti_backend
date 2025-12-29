@@ -2,19 +2,17 @@ const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
 // Package prices per square foot (in INR)
-// Wardrobe (Sliding): Basic ₹1,200-₹2,000, Premium ₹2,000-₹3,500, Luxury ₹3,500-₹5,500 per sqft
-// Wardrobe (Swing): Basic ₹1,000-₹1,800, Premium ₹1,800-₹3,000, Luxury ₹3,000-₹5,000 per sqft
-// Using midpoint of ranges for calculations
+// Updated pricing structure
 const packagePrices = {
   sliding: {
-    basic: 1800, // ₹1,200 - ₹2,000 per sqft (midpoint: ₹1,600)
-    premium: 2750, // ₹2,000 - ₹3,500 per sqft (midpoint: ₹2,750)
-    luxury: 4500, // ₹3,500 - ₹5,500 per sqft (midpoint: ₹4,500)
+    basic: 1800,
+    premium: 2500,
+    luxury: 4500,
   },
   swing: {
-    basic: 1500, // ₹1,000 - ₹1,800 per sqft (midpoint: ₹1,400)
-    premium: 2400, // ₹1,800 - ₹3,000 per sqft (midpoint: ₹2,400)
-    luxury: 4000, // ₹3,000 - ₹5,000 per sqft (midpoint: ₹4,000)
+    basic: 1500,
+    premium: 2200,
+    luxury: 4000,
   },
 };
 
@@ -44,7 +42,10 @@ function calculateEstimate({ length, height, type, package: packageType }) {
     );
   }
 
-  // Calculate area in square feet
+  // Standard wardrobe width (depth) in feet
+  const standardWidth = 2;
+
+  // Calculate area in square feet (front-facing area: length × height)
   const area = length * height;
 
   // Get price per sqft based on type and package
@@ -59,6 +60,7 @@ function calculateEstimate({ length, height, type, package: packageType }) {
     breakdown: {
       length,
       height,
+      width: standardWidth,
       area,
       type,
       package: packageType,
